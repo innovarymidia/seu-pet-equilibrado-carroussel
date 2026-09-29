@@ -8,18 +8,26 @@ export function sanitizeText(text?: string | null): string {
 
   return (
     text
-      // 1. Bloqueia e substitui & por 'e'
+      // 1. Bloqueia e substitui todas as variações de & e entidades HTML por 'e'
       .replace(/&amp;/gi, ' e ')
+      .replace(/&#38;/g, ' e ')
       .replace(/&/g, ' e ')
-      // 2. Bloqueia e substitui travessões (em-dash, en-dash, barra horizontal)
-      .replace(/[—–‒―]/g, ', ')
-      // 3. Substitui hífen isolado com espaços antes e depois (usado como travessão)
+      // 2. Bloqueia e substitui travessões unicode (em-dash, en-dash, figure dash, horizontal bar)
+      .replace(/[—–‒―˗⁃‐‑]/g, ', ')
+      // 3. Bloqueia traços repetidos (-- ou ---) frequentemente usados como travessão
+      .replace(/-{2,}/g, ', ')
+      // 4. Substitui hífen isolado com espaços antes ou depois (usado como travessão)
       .replace(/\s+-\s+/g, ', ')
-      // 4. Limpa pontuações duplicadas resultantes de substituições
+      .replace(/\s+-/g, ', ')
+      .replace(/-\s+/g, ', ')
+      // 5. Limpa pontuações duplicadas resultantes de substituições
       .replace(/,\s*,/g, ',')
       .replace(/\.\s*\./g, '.')
       .replace(/,\s*\./g, '.')
-      // 5. Remove espaços em excesso
+      .replace(/\.\s*,/g, '.')
+      .replace(/,\s*:/g, ':')
+      // 6. Remove espaços em excesso e espaços antes de pontuação
+      .replace(/\s+([,.:;?!])/g, '$1')
       .replace(/\s{2,}/g, ' ')
       .trim()
   );
