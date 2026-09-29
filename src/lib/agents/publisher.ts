@@ -23,10 +23,10 @@ export class PublisherAgent {
     for (let i = 0; i < total; i++) {
       const element = slideElements[i];
       if (element) {
-        // Renderiza com escala 2x ou pixelRatio nativo para garantir 1080x1350 nítido
+        // Renderiza no tamanho exato de 1080x1350 definido no container com qualidade máxima
         const blob = await toBlob(element, {
           quality: 0.98,
-          pixelRatio: 2,
+          pixelRatio: 1,
           cacheBust: true,
         });
 
@@ -75,7 +75,7 @@ INSTRUÇÕES DE POSTAGEM:
   async exportSingleSlide(element: HTMLElement, slideIndex: number): Promise<Blob | null> {
     return await toBlob(element, {
       quality: 0.98,
-      pixelRatio: 2,
+      pixelRatio: 1,
       cacheBust: true,
     });
   }
