@@ -25,9 +25,9 @@ export interface QAReport {
 }
 
 export class QualityReviewerAgent {
-  name = 'Camila Siqueira';
-  title = 'Revisora de Qualidade e Retenção de Conteúdo';
-  avatar = '🔍';
+  name = 'Kakashi Hatake';
+  title = 'Auditor de Qualidade Ninja & Retenção de Conteúdo';
+  avatar = '⚡';
 
   reviewAndAutoCorrect(slides: SlideData[]): QAReport {
     let forbiddenCharsCount = 0;

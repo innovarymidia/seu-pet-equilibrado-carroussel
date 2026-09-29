@@ -9,9 +9,9 @@ export interface StrategyBrief {
 }
 
 export class StrategistAgent {
-  name = 'Lucas Prado';
-  title = 'Estrategista de Vendas B2B Food Service';
-  avatar = '🎯';
+  name = 'Shikamaru Nara';
+  title = 'Estrategista Mestre de Vendas B2B & Funis Food Service';
+  avatar = '♟️';
 
   analyze(input: GenerationInput): StrategyBrief {
     const topic = input.topic || 'Como parar de depender das taxas abusivas do iFood';

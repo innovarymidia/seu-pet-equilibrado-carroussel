@@ -9,9 +9,9 @@ export interface CopywriterOutput {
 }
 
 export class CopywriterAgent {
-  name = 'Helena Brandão';
-  title = 'Copywriter Especialista em Carrosséis B2B';
-  avatar = '✍️';
+  name = 'Light Yagami';
+  title = 'Mestre do Roteiro & Copywriting de Alta Conversão';
+  avatar = '📖';
 
   generate(input: GenerationInput, brief: StrategyBrief): CopywriterOutput {
     const slideCount = Math.min(Math.max(input.slideCount || 6, 5), 7);

@@ -3,9 +3,9 @@ import { toBlob } from 'html-to-image';
 import { CarouselProject } from '../types';
 
 export class PublisherAgent {
-  name = 'Felipe Noronha';
-  title = 'Gerenciador de Exportação e Automação Meta';
-  avatar = '📦';
+  name = 'Saitama';
+  title = 'Comandante de Exportação Rápida & Automação Meta';
+  avatar = '🥊';
 
   /**
    * Empacota todos os slides do carrossel em um arquivo .ZIP em alta resolução
