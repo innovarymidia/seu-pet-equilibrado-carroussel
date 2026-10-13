@@ -1,7 +1,7 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { CarouselProject, SlideData } from './types';
 
-const STORAGE_KEY = 'innovary_carousels_history';
+const STORAGE_KEY = 'seupet_carousels_history';
 
 /**
  * Validador e gerador de UUID v4 padrão RFC 4122 compatível com o PostgreSQL
@@ -32,8 +32,8 @@ export function getSupabaseCredentials(): { url: string; anonKey: string } {
   let anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '';
 
   if (typeof window !== 'undefined') {
-    const localUrl = localStorage.getItem('innovary_supabase_url');
-    const localKey = localStorage.getItem('innovary_supabase_key');
+    const localUrl = localStorage.getItem('seupet_supabase_url');
+    const localKey = localStorage.getItem('seupet_supabase_key');
     if (localUrl && localUrl.trim()) url = localUrl.trim();
     if (localKey && localKey.trim()) anonKey = localKey.trim();
   }
@@ -169,8 +169,8 @@ export async function saveCarousel(
         {
           id: validProjectId,
           topic: project.topic,
-          target_audience: project.targetAudience || 'Donos de Delivery e Food Service',
-          niche: project.niche || 'Food Service / Tráfego Hiperlocal',
+          target_audience: project.targetAudience || 'Tutores de Cães e Famílias com Pets',
+          niche: project.niche || 'Adestramento e Comportamento Canino Equilibrado',
           slide_count: project.slideCount || project.slides.length,
           theme_style: project.themeStyle,
           caption: project.caption || '',
@@ -290,7 +290,7 @@ export async function getCarousels(): Promise<CarouselProject[]> {
             caption: item.caption,
             hashtags: item.hashtags || [],
             status: item.status || 'draft',
-            authorHandle: '@innovarymidia',
+            authorHandle: '@seupetequilibrado',
             slides: sortedSlides,
           };
         });

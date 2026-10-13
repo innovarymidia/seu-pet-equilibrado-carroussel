@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { SlideData, ThemeStyle } from '../lib/types';
 import { THEME_CONFIGS } from '../lib/presets';
 import { sanitizeText } from '../lib/sanitizer';
-import { INNOVARY_LOGO_BASE64 } from '../lib/brandLogo';
+import { PET_LOGO_BASE64 } from '../lib/brandLogo';
 import { 
   Flame, 
   AlertTriangle, 
@@ -22,7 +22,7 @@ interface SlideCanvasProps {
 }
 
 export const SlideCanvas = forwardRef<HTMLDivElement, SlideCanvasProps>(
-  ({ slide, themeStyle, authorHandle = '@innovarymidia', isExporting = false }, ref) => {
+  ({ slide, themeStyle, authorHandle = '@seupetequilibrado', isExporting = false }, ref) => {
     const config = THEME_CONFIGS[themeStyle] || THEME_CONFIGS.dark_fire;
     const isFirst = slide.slideNumber === 1;
     const isLast = slide.slideNumber === slide.totalSlides;
@@ -145,8 +145,8 @@ export const SlideCanvas = forwardRef<HTMLDivElement, SlideCanvasProps>(
               style={{ borderColor: config.accent, background: '#0d0b0b' }}
             >
               <img 
-                src={INNOVARY_LOGO_BASE64} 
-                alt="Innovary Mídia" 
+                src={PET_LOGO_BASE64} 
+                alt="Seu Pet Equilibrado" 
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
@@ -444,7 +444,7 @@ export const SlideCanvas = forwardRef<HTMLDivElement, SlideCanvasProps>(
                 height: isExporting ? '14px' : '6px'
               }} 
             />
-            <span>Tráfego Pago para Food Service</span>
+            <span>Adestramento & Comportamento Canino</span>
           </div>
 
           <div className="flex items-center font-bold" style={{ color: config.accent, gap: isExporting ? '10px' : '4px' }}>

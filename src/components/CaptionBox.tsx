@@ -68,7 +68,7 @@ export const CaptionBox: React.FC<CaptionBoxProps> = ({ caption, hashtags, onUpd
       <div>
         <div className="flex items-center gap-1.5 text-xs font-semibold text-brand-muted mb-2">
           <Hash className="w-3.5 h-3.5 text-brand-orange" />
-          Hashtags Segmentadas para Food Service e Tráfego:
+          Hashtags Segmentadas para Adestramento e Comportamento Canino:
         </div>
         <div className="flex flex-wrap gap-1.5">
           {hashtags.map((tag, i) => (

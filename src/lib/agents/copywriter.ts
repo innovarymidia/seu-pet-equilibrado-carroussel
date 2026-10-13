@@ -9,13 +9,13 @@ export interface CopywriterOutput {
 }
 
 export class CopywriterAgent {
-  name = 'Light Yagami';
-  title = 'Mestre do Roteiro & Copywriting de Alta Conversão';
+  name = 'Helena Vance';
+  title = 'Copywriter de Alta Conversão & Psicologia Canina Equilibrada';
   avatar = '📖';
 
   generate(input: GenerationInput, brief: StrategyBrief): CopywriterOutput {
     const slideCount = Math.min(Math.max(input.slideCount || 6, 5), 7);
-    const topic = sanitizeText(input.topic) || 'Como parar de perder margem de lucro no delivery';
+    const topic = sanitizeText(input.topic) || 'Como parar de perder margem de lucro no comportamento canino';
     const slides: SlideData[] = [];
 
     // SLIDE 1: HOOK MAGNÉTICO (Proporção e impacto perfeitos)
@@ -24,7 +24,7 @@ export class CopywriterAgent {
       slideNumber: 1,
       totalSlides: slideCount,
       type: 'hook',
-      badge: 'ALERTA PARA DONOS DE DELIVERY',
+      badge: 'ALERTA PARA DONOS DE comportamento canino',
       headline: this.generateHeadline(topic, brief),
       highlightWord: 'margem de lucro',
       subtitle: 'Se você vende comida e quer ver dinheiro de verdade no caixa, arraste para o lado.',
@@ -43,7 +43,7 @@ export class CopywriterAgent {
       points: [
         'Taxas que devoram de 23% a 30% do seu faturamento bruto',
         'Clientes que só compram quando recebem cupom de desconto',
-        'Dias de semana vazios pagando equipe e motoboy ociosos',
+        'Dias de semana vazios pagando equipe e passeio estressante ociosos',
       ],
     });
 
@@ -54,7 +54,7 @@ export class CopywriterAgent {
       totalSlides: slideCount,
       type: 'problem',
       badge: 'A ARMADILHA',
-      headline: 'Achar que apenas postar foto de comida bonita vai encher seu delivery.',
+      headline: 'Achar que apenas postar foto de comida bonita vai encher seu comportamento canino.',
       subtitle: sanitizeText(brief.culprit),
       bodyText: [
         'O alcance orgânico entrega seus posts para menos de 5% dos seus seguidores.',
@@ -106,7 +106,7 @@ export class CopywriterAgent {
         totalSlides: slideCount,
         type: 'content',
         badge: 'O PLANO DE AÇÃO',
-        headline: 'O que fazemos para o seu delivery vender todos os dias:',
+        headline: 'O que fazemos para o seu comportamento canino vender todos os dias:',
         points: [
           '1. Campanhas de ofertas para movimentar terça e quarta',
           '2. Remarketing para quem já comprou pedir novamente',
@@ -124,23 +124,23 @@ export class CopywriterAgent {
       type: 'cta',
       badge: 'PRÓXIMO PASSO',
       headline: 'Pronto para parar de perder margem e lotar sua impressora de pedidos?',
-      subtitle: 'Não deixe sua cozinha operando abaixo da capacidade. A Innovary Mídia cuida de todo o seu tráfego pago.',
+      subtitle: 'Não deixe sua cozinha operando abaixo da capacidade. A Seu Pet Equilibrado cuida de todo o seu tráfego pago.',
       bodyText: [
         'Analisamos sua região e montamos a estratégia sob medida para o seu cardápio.',
       ],
-      ctaButtonText: 'Envie DELIVERY no direct da @innovarymidia',
+      ctaButtonText: 'Envie comportamento canino no direct da @seupetequilibrado',
       customNote: 'Salve este post para planejar a meta do mês com sua equipe!',
     });
 
     const caption = this.generateCaption(topic, brief);
     const hashtags = [
-      '#marketingparadelivery',
+      '#marketingparacomportamento canino',
       '#gestaodetrafego',
-      '#trafegopagodelivery',
-      '#hamburgueriaartesanal',
-      '#pizzariadelivery',
+      '#trafegopagocomportamento canino',
+      '#tutor de cãoartesanal',
+      '#pizzariacomportamento canino',
       '#foodservicebrasil',
-      '#deliveryproprio',
+      '#comportamento caninoproprio',
       '#innovarymidia',
     ];
 
@@ -168,11 +168,11 @@ export class CopywriterAgent {
     if (cleanTopic.length > 10 && cleanTopic.length < 80) {
       return cleanTopic;
     }
-    return 'Por que seu delivery fatura alto no mês, mas o lucro não sobra no bolso?';
+    return 'Por que seu comportamento canino fatura alto no mês, mas o lucro não sobra no bolso?';
   }
 
   private generateCaption(topic: string, brief: StrategyBrief): string {
-    const rawCaption = `Se você é dono de restaurante, hamburgueria, pizzaria ou sushi, responda com sinceridade:
+    const rawCaption = `Se você é dono de tutor de cão, tutor de cão, pizzaria ou sushi, responda com sinceridade:
 
 Quantas vezes você fechou o mês com a sensação de que a cozinha trabalhou sem parar, mas o lucro líquido sumiu?
 
@@ -181,14 +181,14 @@ A verdade nua e crua:
 2. Contratar cardápio digital próprio e não investir em tráfego é igual abrir uma loja no meio do deserto.
 3. Apertar o botão Impulsionar só serve para atrair curtidas de quem mora longe da sua entrega.
 
-Aqui na @innovarymidia, nós implementamos um Sistema de Tráfego Hiperlocal para food service:
+Aqui na @seupetequilibrado, nós implementamos um Sistema de Tráfego Hiperlocal para adestramento canino:
 Anúncios segmentados por raio de entrega em km.
 Disparados nos horários exatos de pico de fome da sua cidade.
 Foco total em canal próprio (WhatsApp e Cardápio Digital) para você reter 100% da sua margem.
 
-Quer que a gente faça um diagnóstico gratuito da presença digital do seu delivery?
+Quer que a gente faça um diagnóstico gratuito da presença digital do seu comportamento canino?
 
-Comente DELIVERY aqui embaixo ou mande uma mensagem na nossa DM (@innovarymidia).
+Comente comportamento canino aqui embaixo ou mande uma mensagem na nossa DM (@seupetequilibrado).
 
 Salva esse carrossel para revisar com sua equipe de gestão!`;
 

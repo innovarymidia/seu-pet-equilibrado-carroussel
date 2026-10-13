@@ -2,20 +2,24 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Innovary Mídia | Gerador de Carrosséis Multi-Agente para Delivery',
+  title: 'Seu Pet Equilibrado | Gerador de Carrosséis de Adestramento Canino com IA',
   description:
-    'Sistema inteligente de múltiplos agentes para geração de carrosséis de alta conversão para donos de delivery, restaurantes e food service. Innovary Mídia.',
+    'Sistema inteligente de múltiplos agentes para geração de carrosséis de alta conversão e autoridade sobre adestramento e comportamento canino equilibrado. Seu Pet Equilibrado.',
   keywords: [
-    'tráfego pago delivery',
-    'marketing food service',
-    'carrossel instagram',
-    'innovary mídia',
-    'gestão de tráfego restaurante',
+    'adestramento canino',
+    'comportamento canino',
+    'adestramento equilibrado',
+    'limites e regras cães',
+    'passeio sem puxar',
+    'reatividade canina',
+    'ansiedade de separação cães',
+    'seu pet equilibrado',
+    'psicologia canina',
   ],
-  authors: [{ name: 'Innovary Mídia', url: 'https://www.innovarymidia.com.br' }],
+  authors: [{ name: 'Seu Pet Equilibrado', url: 'https://www.instagram.com/seupetequilibrado' }],
   icons: {
-    icon: '/innovary-logo-circle.png',
-    apple: '/innovary-logo-circle.png',
+    icon: '/pet-logo-circle.png',
+    apple: '/pet-logo-circle.png',
   },
 };
 

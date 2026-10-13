@@ -1,6 +1,6 @@
 import React from 'react';
 import { Download, Settings, ExternalLink, ShieldCheck } from 'lucide-react';
-import { INNOVARY_LOGO_URL } from '../lib/brandLogo';
+import { PET_LOGO_URL } from '../lib/brandLogo';
 
 interface HeaderProps {
   onOpenSettings: () => void;
@@ -24,30 +24,30 @@ export const Header: React.FC<HeaderProps> = ({
             className="w-10 h-10 rounded-full overflow-hidden border border-brand-orange/40 flex items-center justify-center shadow-glowSm bg-[#0d0b0b] shrink-0"
           >
             <img 
-              src={INNOVARY_LOGO_URL} 
-              alt="Innovary Mídia" 
+              src={PET_LOGO_URL} 
+              alt="Seu Pet Equilibrado" 
               className="w-full h-full object-cover rounded-full" 
             />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-base md:text-lg text-white tracking-tight leading-none">
-                Innovary Mídia
+                Seu Pet Equilibrado
               </span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-orange/15 text-brand-orange border border-brand-orange/30">
-                Food Service AI
+                Adestramento Canino AI
               </span>
             </div>
             <p className="text-[11px] text-brand-muted font-medium mt-0.5 flex items-center gap-1.5">
-              <span>@innovarymidia</span>
+              <span>@seupetequilibrado</span>
               <span>•</span>
               <a
-                href="https://www.innovarymidia.com.br"
+                href="https://www.instagram.com/seupetequilibrado"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-brand-orange transition-colors flex items-center gap-0.5"
               >
-                innovarymidia.com.br
+                seupetequilibrado
                 <ExternalLink className="w-2.5 h-2.5" />
               </a>
             </p>

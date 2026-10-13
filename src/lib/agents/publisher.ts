@@ -43,7 +43,7 @@ export class PublisherAgent {
 
     // Adiciona arquivo de texto com a legenda e hashtags
     if (folder) {
-      const readmeContent = `CARROSSEL INNOVARY MÍDIA (@innovarymidia)
+      const readmeContent = `CARROSSEL INNOVARY MÍDIA (@seupetequilibrado)
 Tema: ${project.topic}
 Total de Lâminas: ${project.slideCount}
 Estilo Visual: ${project.themeStyle}

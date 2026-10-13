@@ -123,7 +123,7 @@ export class QualityReviewerAgent {
       {
         name: 'CTA de Conversão no Slide Final',
         passed: Boolean(correctedSlides[correctedSlides.length - 1]?.ctaButtonText),
-        feedback: 'Chamada clara direcionando para o direct da @innovarymidia.',
+        feedback: 'Chamada clara direcionando para o direct da @seupetequilibrado.',
       },
     ];
 

@@ -81,7 +81,7 @@ export class MultiAgentOrchestrator {
     };
 
     // =========================================================================
-    // ETAPA 1: AGENTE ESTRATEGISTA B2B FOOD SERVICE
+    // ETAPA 1: AGENTE ESTRATEGISTA DE ADESTRAMENTO EQUILIBRADO
     // =========================================================================
     updateAgent('strategist', 'running', 'Analisando o perfil do dono de delivery e dores do iFood...');
     await delay(350);
@@ -154,7 +154,7 @@ export class MultiAgentOrchestrator {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       topic: input.topic || 'Como parar de perder margem no delivery',
-      targetAudience: 'Donos de Hamburguerias, Pizzarias e Restaurantes Food Service',
+      targetAudience: 'Tutores de Cães com Desafios Comportamentais (Passeio, Reatividade, Ansiedade)',
       niche: 'Tráfego Pago para Delivery',
       slideCount: qaReport.sanitizedSlides.length,
       themeStyle: input.themeStyle,
@@ -162,7 +162,7 @@ export class MultiAgentOrchestrator {
       hashtags: copyOutput.hashtags,
       slides: qaReport.sanitizedSlides,
       status: 'reviewed',
-      authorHandle: '@innovarymidia',
+      authorHandle: '@seupetequilibrado',
       qaReport,
     };
 
@@ -176,7 +176,7 @@ export class MultiAgentOrchestrator {
 
     if (!openrouterKey && !geminiKey) return null;
 
-    const prompt = `Você é o copywriter estrategista da agência @innovarymidia (www.innovarymidia.com.br), especializada em tráfego e vendas para restaurantes e delivery.
+    const prompt = `Você é o copywriter estrategista da agência @seupetequilibrado (www.innovarymidia.com.br), especializada em tráfego e vendas para restaurantes e delivery.
 Crie um carrossel para Instagram de EXATAMENTE ${input.slideCount} lâminas.
 Tema: "${input.topic || 'Como parar de perder margem no delivery'}"
 
@@ -185,7 +185,7 @@ DIRETRIZES FUNDAMENTAIS DE DESIGN E COPY:
 2. JAMAIS use travessão (— ou –) nem hífens isolados no texto.
 3. CONCISÃO ABSOLUTA: Textos ultra enxutos (headline máx 75 caracteres, subtítulo máx 95 caracteres) para caber perfeitamente na proporção 4:5 vertical (1080x1350) sem corte.
 4. Lâmina 1: Gancho forte instigando o dono de delivery.
-5. Lâmina final (slide ${input.slideCount}): CTA para mandar mensagem no direct da @innovarymidia.
+5. Lâmina final (slide ${input.slideCount}): CTA para mandar mensagem no direct da @seupetequilibrado.
 
 Retorne SOMENTE um JSON válido com a seguinte estrutura:
 {
@@ -199,7 +199,7 @@ Retorne SOMENTE um JSON válido com a seguinte estrutura:
       "ctaButtonText": "Arraste para entender ➔"
     }
   ],
-  "caption": "Legenda persuasiva completa com quebras de linha e chamada para o direct da @innovarymidia",
+  "caption": "Legenda persuasiva completa com quebras de linha e chamada para o direct da @seupetequilibrado",
   "hashtags": ["#marketingparadelivery", "#gestaodetrafego", "#innovarymidia"]
 }`;
 
