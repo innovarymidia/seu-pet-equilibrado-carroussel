@@ -10,7 +10,7 @@ import {
 } from '../lib/types';
 import { MultiAgentOrchestrator } from '../lib/agents/orchestrator';
 import { PublisherAgent } from '../lib/agents/publisher';
-import { saveCarousel, getCarousels } from '../lib/supabase';
+import { saveCarousel, getCarousels, isCanineProject, clearAllCarousels } from '../lib/supabase';
 import { Header } from '../components/Header';
 import { GeneratorForm } from '../components/GeneratorForm';
 import { AgentTimeline } from '../components/AgentTimeline';
@@ -22,7 +22,8 @@ import { SettingsModal } from '../components/SettingsModal';
 import { SlideCanvas } from '../components/SlideCanvas';
 import { 
   Sparkles, 
-  History
+  History,
+  Trash2
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -54,21 +55,29 @@ export default function HomePage() {
   // Inicialização com um carrossel de exemplo de alto impacto sobre adestramento canino
   useEffect(() => {
     const initDefault = async () => {
-      const saved = await getCarousels();
-      setHistory(saved);
+      // Purgar chaves legadas de delivery do navegador
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('innovary_carousels_history');
+      }
 
-      if (saved.length > 0) {
-        setProject(saved[0]);
-        setSelectedTheme(saved[0].themeStyle);
+      const saved = await getCarousels();
+      const canineList = saved.filter(isCanineProject);
+      setHistory(canineList);
+
+      if (canineList.length > 0) {
+        setProject(canineList[0]);
+        setSelectedTheme(canineList[0].themeStyle || 'rose_editorial');
       } else {
-        // Gera o carrossel padrão oficial da marca
+        // Gera o carrossel padrão oficial da marca Seu Pet Equilibrado
         const initial = await orchestrator.run({
           topic: 'Passeio Sem Puxar: O método passo a passo para caminhar com guia frouxa',
           slideCount: 6,
           themeStyle: 'rose_editorial',
         });
         setProject(initial);
+        setSelectedTheme('rose_editorial');
         await saveCarousel(initial);
+        setHistory([initial]);
       }
     };
     initDefault();
@@ -98,9 +107,9 @@ export default function HomePage() {
       await saveCarousel(newProject);
       showToast('🎉 Carrossel produzido com sucesso pela equipe do Seu Pet Equilibrado!');
 
-      // Atualiza histórico
+      // Atualiza histórico estritamente com projetos caninos
       const saved = await getCarousels();
-      setHistory(saved);
+      setHistory(saved.filter(isCanineProject));
     } catch (err: any) {
       console.error(err);
       showToast('❌ Erro na geração. Verifique os logs.');
@@ -257,38 +266,61 @@ export default function HomePage() {
         </div>
 
         {/* HISTÓRICO EXPANSÍVEL */}
-        {showHistory && history.length > 0 && (
+        {showHistory && (
           <div className="p-4 rounded-2xl bg-[#14171C] border border-white/[0.08] space-y-3 animate-in fade-in">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[#9DA3B4]">
-              Carrosséis Salvos Recentemente:
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-              {history.map((h) => (
-                <div
-                  key={h.id}
-                  onClick={() => {
-                    setProject(h);
-                    setSelectedTheme(h.themeStyle);
-                    setSelectedSlideIndex(0);
-                    setShowHistory(false);
-                    showToast('Carrossel carregado do histórico!');
+            <div className="flex items-center justify-between">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#9DA3B4]">
+                Carrosséis Salvos Recentemente ({history.length}):
+              </h3>
+              {history.length > 0 && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await clearAllCarousels();
+                    setHistory([]);
+                    showToast('Histórico e cache local limpos com sucesso!');
                   }}
-                  className={`p-3 rounded-xl border cursor-pointer transition-all ${
-                    project?.id === h.id
-                      ? 'border-[#F5BAC9] bg-[#2B181E]/40'
-                      : 'border-white/[0.08] bg-[#0C0E12] hover:border-[#F5BAC9]/40'
-                  }`}
+                  className="text-[11px] font-semibold text-rose-400 hover:text-rose-300 flex items-center gap-1 transition-colors px-2 py-1 rounded bg-rose-500/10 border border-rose-500/20"
                 >
-                  <div className="text-xs font-bold text-white line-clamp-2">
-                    {h.topic}
-                  </div>
-                  <div className="text-[10px] text-[#9DA3B4] mt-1 flex items-center justify-between">
-                    <span>{h.slideCount} lâminas • {h.themeStyle}</span>
-                    <span>{new Date(h.createdAt).toLocaleDateString('pt-BR')}</span>
-                  </div>
-                </div>
-              ))}
+                  <Trash2 className="w-3 h-3" />
+                  Limpar Histórico
+                </button>
+              )}
             </div>
+
+            {history.length === 0 ? (
+              <p className="text-xs text-zinc-500 py-2">
+                Nenhum carrossel salvo no histórico local. Todos os novos conteúdos produzidos ficarão salvos aqui.
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                {history.map((h) => (
+                  <div
+                    key={h.id}
+                    onClick={() => {
+                      setProject(h);
+                      setSelectedTheme(h.themeStyle);
+                      setSelectedSlideIndex(0);
+                      setShowHistory(false);
+                      showToast('Carrossel carregado do histórico!');
+                    }}
+                    className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                      project?.id === h.id
+                        ? 'border-[#F5BAC9] bg-[#2B181E]/40'
+                        : 'border-white/[0.08] bg-[#0C0E12] hover:border-[#F5BAC9]/40'
+                    }`}
+                  >
+                    <div className="text-xs font-bold text-white line-clamp-2">
+                      {h.topic}
+                    </div>
+                    <div className="text-[10px] text-[#9DA3B4] mt-1 flex items-center justify-between">
+                      <span>{h.slideCount} lâminas • {h.themeStyle}</span>
+                      <span>{new Date(h.createdAt).toLocaleDateString('pt-BR')}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 

@@ -4,6 +4,86 @@ import { CarouselProject, SlideData } from './types';
 const STORAGE_KEY = 'seupet_carousels_history';
 
 /**
+ * Palavras-chave do nicho legado de delivery/restaurante que devem ser estritamente bloqueadas
+ */
+const FORBIDDEN_LEGACY_WORDS = [
+  'innovary',
+  'ifood',
+  'delivery',
+  'hamburgueria',
+  'pizzaria',
+  'sushi',
+  'restaurante',
+  'marmitaria',
+  'taxas de app',
+  'taxa de entrega',
+  'comissão',
+  'comissao',
+  'cardápio',
+  'cardapio',
+  'entregador',
+  'motoboy',
+  'ticket médio',
+  'ticket medio',
+  'whatsapp delivery',
+  'pedidos no delivery',
+];
+
+/**
+ * Valida se um projeto pertence genuinamente ao nicho de adestramento e comportamento canino
+ */
+export function isCanineProject(project: CarouselProject | any): boolean {
+  if (!project) return false;
+
+  const slidesText = Array.isArray(project.slides)
+    ? project.slides
+        .map(
+          (s: any) =>
+            `${s.headline || ''} ${s.subtitle || ''} ${s.badge || ''} ${
+              Array.isArray(s.bodyText) ? s.bodyText.join(' ') : ''
+            } ${Array.isArray(s.points) ? s.points.join(' ') : ''}`
+        )
+        .join(' ')
+    : '';
+
+  const fullContent = `${project.topic || ''} ${project.targetAudience || ''} ${
+    project.niche || ''
+  } ${project.caption || ''} ${slidesText}`.toLowerCase();
+
+  // Se contiver qualquer palavra proibida legada, rejeita imediatamente
+  for (const word of FORBIDDEN_LEGACY_WORDS) {
+    if (fullContent.includes(word)) {
+      return false;
+    }
+  }
+
+  // Precisa ter vínculo com cães, tutores, adestramento ou comportamento
+  const canineKeywords = [
+    'pet',
+    'cão',
+    'cao',
+    'cães',
+    'caes',
+    'cachorro',
+    'tutor',
+    'tutores',
+    'adestrament',
+    'comportament',
+    'passeio',
+    'guia',
+    'latid',
+    'filhote',
+    'xixi',
+    'mordid',
+    'ansiedad',
+    'place',
+    'reativ',
+  ];
+
+  return canineKeywords.some((kw) => fullContent.includes(kw));
+}
+
+/**
  * Validador e gerador de UUID v4 padrão RFC 4122 compatível com o PostgreSQL
  */
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -225,7 +305,8 @@ export async function saveCarousel(
 }
 
 /**
- * Carrega a lista completa de projetos salvos (Supabase com fallback LocalStorage)
+ * Carrega a lista completa de projetos salvos (Supabase com fallback LocalStorage),
+ * garantindo que apenas conteúdos sobre adestramento e comportamento canino sejam retornados.
  */
 export async function getCarousels(): Promise<CarouselProject[]> {
   const client = getSupabase();
@@ -295,14 +376,28 @@ export async function getCarousels(): Promise<CarouselProject[]> {
           };
         });
 
-        // Sincroniza o cache local
+        // FILTRA STRICTAMENTE CARROSSÉIS DE COMPORTAMENTO CANINO
+        const canineProjects = mapped.filter(isCanineProject);
+
+        // Se houver carrosséis legados no banco (ex: delivery/restaurante), expurga do banco
+        const legacyItems = mapped.filter((p) => !isCanineProject(p));
+        if (legacyItems.length > 0) {
+          for (const leg of legacyItems) {
+            try {
+              client.from('carousels').delete().eq('id', leg.id).then();
+            } catch (err) {}
+          }
+        }
+
+        // Sincroniza o cache local apenas com os carrosséis caninos válidos
         if (typeof window !== 'undefined') {
           try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(mapped.slice(0, 30)));
+            localStorage.removeItem('innovary_carousels_history');
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(canineProjects.slice(0, 30)));
           } catch (e) {}
         }
 
-        return mapped;
+        return canineProjects;
       }
     } catch (e) {
       console.warn('Erro ao carregar do Supabase, buscando LocalStorage:', e);
@@ -332,6 +427,16 @@ export async function deleteCarousel(id: string): Promise<boolean> {
   }
 
   return true;
+}
+
+/**
+ * Purgar completamente todos os carrosséis salvos em cache local
+ */
+export async function clearAllCarousels(): Promise<void> {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem('innovary_carousels_history');
+  }
 }
 
 /**
@@ -371,6 +476,8 @@ export async function setSystemSetting(key: string, value: any): Promise<boolean
 
 function saveToLocalStorage(project: CarouselProject) {
   if (typeof window === 'undefined') return;
+  if (!isCanineProject(project)) return; // Nunca salva itens não-caninos
+
   try {
     const existing = loadFromLocalStorage();
     const index = existing.findIndex((p) => p.id === project.id);
@@ -388,8 +495,19 @@ function saveToLocalStorage(project: CarouselProject) {
 function loadFromLocalStorage(): CarouselProject[] {
   if (typeof window === 'undefined') return [];
   try {
+    // Purgar chave legada
+    localStorage.removeItem('innovary_carousels_history');
+
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
+    if (!raw) return [];
+    const parsed: CarouselProject[] = JSON.parse(raw);
+    const validCanine = parsed.filter(isCanineProject);
+
+    // Se encontramos itens inválidos, re-salva apenas os válidos
+    if (validCanine.length !== parsed.length) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(validCanine));
+    }
+    return validCanine;
   } catch (e) {
     return [];
   }
