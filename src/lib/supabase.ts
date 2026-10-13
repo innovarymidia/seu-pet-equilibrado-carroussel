@@ -32,8 +32,8 @@ export function getSupabaseCredentials(): { url: string; anonKey: string } {
   let anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '';
 
   if (typeof window !== 'undefined') {
-    const localUrl = localStorage.getItem('seupet_supabase_url');
-    const localKey = localStorage.getItem('seupet_supabase_key');
+    const localUrl = localStorage.getItem('seupet_supabase_url') || localStorage.getItem('innovary_supabase_url');
+    const localKey = localStorage.getItem('seupet_supabase_key') || localStorage.getItem('innovary_supabase_key');
     if (localUrl && localUrl.trim()) url = localUrl.trim();
     if (localKey && localKey.trim()) anonKey = localKey.trim();
   }

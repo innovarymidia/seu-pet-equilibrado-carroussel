@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, FileText, Hash, Send } from 'lucide-react';
+import { Copy, Check, FileText } from 'lucide-react';
 import { sanitizeText } from '../lib/sanitizer';
 
 interface CaptionBoxProps {
@@ -25,20 +25,20 @@ export const CaptionBox: React.FC<CaptionBoxProps> = ({ caption, hashtags, onUpd
   };
 
   return (
-    <div className="bg-brand-card border border-brand-border rounded-2xl p-5 shadow-lg space-y-4">
-      <div className="flex items-center justify-between pb-3 border-b border-brand-border">
+    <div className="bg-[#14171C] border border-white/[0.08] rounded-2xl p-5 shadow-lg space-y-4">
+      <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
         <div className="flex items-center gap-2">
-          <FileText className="w-4 h-4 text-brand-orange" />
+          <FileText className="w-4 h-4 text-[#F5BAC9]" />
           <h3 className="font-bold text-sm text-white">
-            Legenda Otimizada para o Instagram
+            Legenda Otimizada para o Instagram (@seupetequilibrado)
           </h3>
         </div>
         <button
           onClick={handleCopy}
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+          className={`px-3 py-1.5 rounded-lg text-xs font-extrabold flex items-center gap-1.5 transition-all ${
             copied
               ? 'bg-emerald-600 text-white'
-              : 'bg-brand-orange text-white hover:bg-brand-orangeDark shadow-glowSm'
+              : 'bg-[#F5BAC9] text-[#121418] hover:bg-[#F8CAD6] shadow-rose'
           }`}
         >
           {copied ? (
@@ -59,24 +59,23 @@ export const CaptionBox: React.FC<CaptionBoxProps> = ({ caption, hashtags, onUpd
       <textarea
         rows={7}
         value={cleanCaption}
-        onChange={(e) => onUpdateCaption && onUpdateCaption(sanitizeText(e.target.value))}
-        placeholder="Texto da legenda..."
-        className="w-full bg-brand-bg border border-brand-border rounded-xl p-3 text-xs text-zinc-200 leading-relaxed focus:outline-none focus:border-brand-orange transition-colors resize-none font-sans"
+        onChange={(e) => onUpdateCaption?.(e.target.value)}
+        placeholder="Legenda do post com storytelling e chamada para ação..."
+        className="w-full bg-[#0C0E12] border border-white/[0.08] rounded-xl px-4 py-3 text-xs md:text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-[#F5BAC9] transition-colors resize-y leading-relaxed"
       />
 
-      {/* Hashtags Estratégicas */}
-      <div>
-        <div className="flex items-center gap-1.5 text-xs font-semibold text-brand-muted mb-2">
-          <Hash className="w-3.5 h-3.5 text-brand-orange" />
-          Hashtags Segmentadas para Adestramento e Comportamento Canino:
-        </div>
+      {/* Hashtags da Marca */}
+      <div className="pt-2">
+        <span className="text-[11px] font-bold text-[#9DA3B4] uppercase tracking-wider block mb-1.5">
+          Hashtags Estratégicas:
+        </span>
         <div className="flex flex-wrap gap-1.5">
-          {hashtags.map((tag, i) => (
+          {hashtags.map((h, i) => (
             <span
               key={i}
-              className="text-[11px] px-2 py-0.5 rounded-md bg-brand-bg text-brand-orange border border-brand-border"
+              className="px-2 py-0.5 rounded-md bg-[#0C0E12] text-[#F5BAC9] text-[11px] font-medium border border-[#F5BAC9]/20"
             >
-              {tag}
+              {h}
             </span>
           ))}
         </div>

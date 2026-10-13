@@ -22,12 +22,7 @@ import { SettingsModal } from '../components/SettingsModal';
 import { SlideCanvas } from '../components/SlideCanvas';
 import { 
   Sparkles, 
-  Download, 
-  History, 
-  CheckCircle2, 
-  AlertCircle,
-  Share2,
-  ChevronDown
+  History
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -36,7 +31,7 @@ export default function HomePage() {
 
   const [project, setProject] = useState<CarouselProject | null>(null);
   const [selectedSlideIndex, setSelectedSlideIndex] = useState<number>(0);
-  const [selectedTheme, setSelectedTheme] = useState<ThemeStyle>('dark_fire');
+  const [selectedTheme, setSelectedTheme] = useState<ThemeStyle>('rose_editorial');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDownloadingZip, setIsDownloadingZip] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
@@ -48,7 +43,7 @@ export default function HomePage() {
   const [showHistory, setShowHistory] = useState(false);
   const [feedbackToast, setFeedbackToast] = useState<string | null>(null);
 
-  // Container oculto com as lâminas renderizadas em tamanho real para exportação perfeita
+  // Container oculto com as lâminas renderizadas em tamanho real (1080x1350) para exportação perfeita
   const hiddenCanvasRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
   const showToast = (msg: string) => {
@@ -56,7 +51,7 @@ export default function HomePage() {
     setTimeout(() => setFeedbackToast(null), 3500);
   };
 
-  // Inicialização com um carrossel exemplo matador
+  // Inicialização com um carrossel de exemplo de alto impacto sobre adestramento canino
   useEffect(() => {
     const initDefault = async () => {
       const saved = await getCarousels();
@@ -66,11 +61,11 @@ export default function HomePage() {
         setProject(saved[0]);
         setSelectedTheme(saved[0].themeStyle);
       } else {
-        // Gera o carrossel padrão inicial
+        // Gera o carrossel padrão oficial da marca
         const initial = await orchestrator.run({
-          topic: 'O iFood está ficando com 27% a 30% do seu faturamento bruto?',
+          topic: 'Passeio Sem Puxar: O método passo a passo para caminhar com guia frouxa',
           slideCount: 6,
-          themeStyle: 'dark_fire',
+          themeStyle: 'rose_editorial',
         });
         setProject(initial);
         await saveCarousel(initial);
@@ -87,7 +82,7 @@ export default function HomePage() {
     // Recupera chave do Gemini caso salva no LocalStorage
     let geminiKey = '';
     if (typeof window !== 'undefined') {
-      geminiKey = localStorage.getItem('innovary_gemini_key') || '';
+      geminiKey = localStorage.getItem('seupet_gemini_key') || localStorage.getItem('innovary_gemini_key') || '';
     }
 
     try {
@@ -101,7 +96,7 @@ export default function HomePage() {
       setProject(newProject);
       setSelectedTheme(newProject.themeStyle);
       await saveCarousel(newProject);
-      showToast('🎉 Carrossel gerado pela equipe de agentes com sucesso!');
+      showToast('🎉 Carrossel produzido com sucesso pela equipe do Seu Pet Equilibrado!');
 
       // Atualiza histórico
       const saved = await getCarousels();
@@ -171,7 +166,7 @@ export default function HomePage() {
       const url = window.URL.createObjectURL(zipBlob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `innovary-carrossel-${project.topic.slice(0, 25).replace(/\s+/g, '-').toLowerCase()}.zip`;
+      link.download = `seupet-carrossel-${project.topic.slice(0, 25).replace(/\s+/g, '-').toLowerCase()}.zip`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -201,7 +196,7 @@ export default function HomePage() {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `innovary-slide-${String(slideNumber).padStart(2, '0')}.png`;
+        link.download = `seupet-slide-${String(slideNumber).padStart(2, '0')}.png`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -217,7 +212,7 @@ export default function HomePage() {
   const currentSlide = project?.slides[selectedSlideIndex];
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-bg text-white relative selection:bg-brand-orange selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#0C0E12] text-white relative selection:bg-[#F5BAC9] selection:text-[#121418]">
       {/* CABEÇALHO */}
       <Header
         onOpenSettings={() => setIsSettingsOpen(true)}
@@ -228,8 +223,8 @@ export default function HomePage() {
 
       {/* FEEDBACK TOAST */}
       {feedbackToast && (
-        <div className="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl bg-zinc-900 border border-brand-orange/40 text-white text-xs font-bold shadow-glow flex items-center gap-2 animate-in fade-in slide-in-from-bottom-3">
-          <Sparkles className="w-4 h-4 text-brand-orange" />
+        <div className="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl bg-[#14171C] border border-[#F5BAC9]/40 text-white text-xs font-bold shadow-rose flex items-center gap-2 animate-in fade-in slide-in-from-bottom-3">
+          <Sparkles className="w-4 h-4 text-[#F5BAC9]" />
           <span>{feedbackToast}</span>
         </div>
       )}
@@ -237,25 +232,25 @@ export default function HomePage() {
       {/* CORPO PRINCIPAL */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 space-y-6">
         {/* BANNER INFORMATIVO E INTRODUTÓRIO */}
-        <div className="p-4 md:p-5 rounded-2xl bg-gradient-to-r from-brand-card via-brand-card to-brand-bg border border-brand-border flex flex-wrap items-center justify-between gap-4">
+        <div className="p-4 md:p-5 rounded-2xl bg-gradient-to-r from-[#14171C] via-[#14171C] to-[#0C0E12] border border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-brand-orange bg-brand-orange/10 px-2 py-0.5 rounded border border-brand-orange/30">
-              Gerador Estratégico B2B
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#F5BAC9] bg-[#2B181E] px-2.5 py-0.5 rounded border border-[#F5BAC9]/30">
+              Expert em Adestramento e Comportamento Canino
             </span>
             <h1 className="text-lg md:text-xl font-extrabold text-white mt-1">
-              Atraia Donos de Delivery com Carrosséis de Alto Impacto
+              Produção de Conteúdos Estratégicos para Tutores de Cães
             </h1>
-            <p className="text-xs text-brand-muted max-w-2xl mt-0.5">
-              Crie carrosséis de 5 a 7 lâminas formatados na paleta da Innovary Mídia. Faça o dono do restaurante entender que precisa do seu tráfego para parar de queimar dinheiro no iFood.
+            <p className="text-xs text-[#9DA3B4] max-w-2xl mt-0.5">
+              Gere carrosséis de 5 a 7 lâminas no padrão visual oficial do <strong>Seu Pet Equilibrado</strong>. Ensine sobre passeio sem puxar, reatividade, ansiedade de separação, xixi no lugar certo e reforço positivo.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowHistory(!showHistory)}
-              className="px-3 py-2 rounded-xl bg-brand-bg hover:bg-brand-card text-brand-muted hover:text-white border border-brand-border text-xs font-bold flex items-center gap-1.5 transition-colors"
+              className="px-3 py-2 rounded-xl bg-[#0C0E12] hover:bg-[#1B1E26] text-[#9DA3B4] hover:text-white border border-white/[0.08] hover:border-[#F5BAC9]/40 text-xs font-bold flex items-center gap-1.5 transition-colors"
             >
-              <History className="w-3.5 h-3.5 text-brand-orange" />
+              <History className="w-3.5 h-3.5 text-[#F5BAC9]" />
               Histórico ({history.length})
             </button>
           </div>
@@ -263,8 +258,8 @@ export default function HomePage() {
 
         {/* HISTÓRICO EXPANSÍVEL */}
         {showHistory && history.length > 0 && (
-          <div className="p-4 rounded-2xl bg-brand-card border border-brand-border space-y-3 animate-in fade-in">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-muted">
+          <div className="p-4 rounded-2xl bg-[#14171C] border border-white/[0.08] space-y-3 animate-in fade-in">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#9DA3B4]">
               Carrosséis Salvos Recentemente:
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -280,14 +275,14 @@ export default function HomePage() {
                   }}
                   className={`p-3 rounded-xl border cursor-pointer transition-all ${
                     project?.id === h.id
-                      ? 'border-brand-orange bg-brand-orange/10'
-                      : 'border-brand-border bg-brand-bg hover:border-brand-border/80'
+                      ? 'border-[#F5BAC9] bg-[#2B181E]/40'
+                      : 'border-white/[0.08] bg-[#0C0E12] hover:border-[#F5BAC9]/40'
                   }`}
                 >
                   <div className="text-xs font-bold text-white line-clamp-2">
                     {h.topic}
                   </div>
-                  <div className="text-[10px] text-brand-muted mt-1 flex items-center justify-between">
+                  <div className="text-[10px] text-[#9DA3B4] mt-1 flex items-center justify-between">
                     <span>{h.slideCount} lâminas • {h.themeStyle}</span>
                     <span>{new Date(h.createdAt).toLocaleDateString('pt-BR')}</span>
                   </div>

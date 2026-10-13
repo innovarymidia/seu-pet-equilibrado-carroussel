@@ -1,7 +1,7 @@
 import React from 'react';
 import { SlideData } from '../lib/types';
 import { sanitizeText } from '../lib/sanitizer';
-import { Edit3, Type, Tag, AlignLeft, CheckSquare, Send, Sparkles } from 'lucide-react';
+import { Edit3, Type, Tag, AlignLeft, CheckSquare, Send } from 'lucide-react';
 
 interface SlideEditorProps {
   slide: SlideData;
@@ -25,7 +25,7 @@ export const SlideEditor: React.FC<SlideEditorProps> = ({ slide, onUpdateSlide }
 
   const handleAddPoint = () => {
     const currentPoints = [...(slide.points || [])];
-    currentPoints.push('Novo tópico estratégico');
+    currentPoints.push('Novo tópico comportamental');
     handleChange('points', currentPoints);
   };
 
@@ -35,68 +35,68 @@ export const SlideEditor: React.FC<SlideEditorProps> = ({ slide, onUpdateSlide }
   };
 
   return (
-    <div className="bg-brand-card border border-brand-border rounded-2xl p-5 shadow-lg space-y-4">
-      <div className="flex items-center justify-between pb-3 border-b border-brand-border">
+    <div className="bg-[#14171C] border border-white/[0.08] rounded-2xl p-5 shadow-lg space-y-4">
+      <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
         <div className="flex items-center gap-2">
-          <Edit3 className="w-4 h-4 text-brand-orange" />
+          <Edit3 className="w-4 h-4 text-[#F5BAC9]" />
           <h3 className="font-bold text-sm text-white">
             Editar Lâmina #{slide.slideNumber} ({slide.type.toUpperCase()})
           </h3>
         </div>
-        <span className="text-xs px-2 py-0.5 rounded bg-brand-bg text-brand-muted border border-brand-border">
+        <span className="text-xs px-2 py-0.5 rounded bg-[#0C0E12] text-[#F5BAC9] border border-[#F5BAC9]/20 font-medium">
           Edição em Tempo Real
         </span>
       </div>
 
       {/* Badge / Etiqueta */}
       <div>
-        <label className="block text-xs font-semibold text-brand-muted mb-1 flex items-center gap-1.5">
-          <Tag className="w-3.5 h-3.5 text-brand-orange" />
+        <label className="block text-xs font-semibold text-[#9DA3B4] mb-1 flex items-center gap-1.5">
+          <Tag className="w-3.5 h-3.5 text-[#F5BAC9]" />
           Badge / Etiqueta Superior
         </label>
         <input
           type="text"
           value={slide.badge || ''}
           onChange={(e) => handleChange('badge', e.target.value)}
-          placeholder="Ex: O GRANDE ERRO ⚠️"
-          className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-orange transition-colors"
+          placeholder="Ex: O ERRO MAIS COMUM ⚠️"
+          className="w-full bg-[#0C0E12] border border-white/[0.08] rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#F5BAC9] transition-colors"
         />
       </div>
 
       {/* Título Principal (Headline) */}
       <div>
-        <label className="block text-xs font-semibold text-brand-muted mb-1 flex items-center gap-1.5">
-          <Type className="w-3.5 h-3.5 text-brand-orange" />
+        <label className="block text-xs font-semibold text-[#9DA3B4] mb-1 flex items-center gap-1.5">
+          <Type className="w-3.5 h-3.5 text-[#F5BAC9]" />
           Título Principal (Headline)
         </label>
         <textarea
           rows={2}
           value={slide.headline}
           onChange={(e) => handleChange('headline', e.target.value)}
-          placeholder="Título instigante e direto..."
-          className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-orange transition-colors resize-none font-medium"
+          placeholder="Título instigante e direto para o tutor..."
+          className="w-full bg-[#0C0E12] border border-white/[0.08] rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#F5BAC9] transition-colors resize-none font-medium"
         />
       </div>
 
       {/* Subtítulo */}
       <div>
-        <label className="block text-xs font-semibold text-brand-muted mb-1 flex items-center gap-1.5">
-          <AlignLeft className="w-3.5 h-3.5 text-brand-orange" />
+        <label className="block text-xs font-semibold text-[#9DA3B4] mb-1 flex items-center gap-1.5">
+          <AlignLeft className="w-3.5 h-3.5 text-[#F5BAC9]" />
           Subtítulo / Contexto
         </label>
         <input
           type="text"
           value={slide.subtitle || ''}
           onChange={(e) => handleChange('subtitle', e.target.value)}
-          placeholder="Explicação complementar..."
-          className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-orange transition-colors"
+          placeholder="Explicação complementar clara..."
+          className="w-full bg-[#0C0E12] border border-white/[0.08] rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#F5BAC9] transition-colors"
         />
       </div>
 
       {/* Corpo de texto em parágrafos */}
       {slide.bodyText && slide.bodyText.length > 0 && (
         <div>
-          <label className="block text-xs font-semibold text-brand-muted mb-1">
+          <label className="block text-xs font-semibold text-[#9DA3B4] mb-1">
             Texto Explicativo (Card de Destaque)
           </label>
           <textarea
@@ -104,7 +104,7 @@ export const SlideEditor: React.FC<SlideEditorProps> = ({ slide, onUpdateSlide }
             value={slide.bodyText.join('\n')}
             onChange={(e) => handleChange('bodyText', e.target.value.split('\n'))}
             placeholder="Linhas de texto explicativo..."
-            className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-orange transition-colors font-sans"
+            className="w-full bg-[#0C0E12] border border-white/[0.08] rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#F5BAC9] transition-colors font-sans"
           />
         </div>
       )}
@@ -113,13 +113,13 @@ export const SlideEditor: React.FC<SlideEditorProps> = ({ slide, onUpdateSlide }
       {slide.points && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-semibold text-brand-muted flex items-center gap-1.5">
-              <CheckSquare className="w-3.5 h-3.5 text-brand-orange" />
-              Tópicos / Benefícios
+            <label className="text-xs font-semibold text-[#9DA3B4] flex items-center gap-1.5">
+              <CheckSquare className="w-3.5 h-3.5 text-[#F5BAC9]" />
+              Tópicos / Práticas Recomendadas
             </label>
             <button
               onClick={handleAddPoint}
-              className="text-[11px] text-brand-orange hover:text-white transition-colors"
+              className="text-[11px] text-[#F5BAC9] hover:text-white transition-colors"
             >
               + Adicionar item
             </button>
@@ -130,7 +130,7 @@ export const SlideEditor: React.FC<SlideEditorProps> = ({ slide, onUpdateSlide }
                 type="text"
                 value={pt}
                 onChange={(e) => handlePointChange(idx, e.target.value)}
-                className="flex-1 bg-brand-bg border border-brand-border rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-orange transition-colors"
+                className="flex-1 bg-[#0C0E12] border border-white/[0.08] rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#F5BAC9] transition-colors"
               />
               <button
                 onClick={() => handleRemovePoint(idx)}
@@ -147,15 +147,15 @@ export const SlideEditor: React.FC<SlideEditorProps> = ({ slide, onUpdateSlide }
       {/* Chamada para Ação no Slide Final */}
       {slide.ctaButtonText && (
         <div>
-          <label className="block text-xs font-semibold text-brand-muted mb-1 flex items-center gap-1.5">
-            <Send className="w-3.5 h-3.5 text-brand-orange" />
-            Texto do Botão de Chamada para Ação
+          <label className="block text-xs font-semibold text-[#9DA3B4] mb-1 flex items-center gap-1.5">
+            <Send className="w-3.5 h-3.5 text-[#F5BAC9]" />
+            Texto do Botão de Chamada para Ação (CTA)
           </label>
           <input
             type="text"
             value={slide.ctaButtonText}
             onChange={(e) => handleChange('ctaButtonText', e.target.value)}
-            className="w-full bg-brand-bg border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-orange transition-colors font-bold"
+            className="w-full bg-[#0C0E12] border border-white/[0.08] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#F5BAC9] transition-colors font-bold"
           />
         </div>
       )}

@@ -25,9 +25,9 @@ export interface QAReport {
 }
 
 export class QualityReviewerAgent {
-  name = 'Kakashi Hatake';
-  title = 'Auditor de Qualidade Ninja & Retenção de Conteúdo';
-  avatar = '⚡';
+  name = 'Auditor de Qualidade';
+  title = 'Revisor de Conteúdo & Safe Zones do Seu Pet Equilibrado';
+  avatar = '🛡️';
 
   reviewAndAutoCorrect(slides: SlideData[]): QAReport {
     let forbiddenCharsCount = 0;
@@ -47,14 +47,14 @@ export class QualityReviewerAgent {
       let proportionsAdjusted = false;
       const notes: string[] = [];
 
-      // Limita headline a 80 caracteres para garantir 2 a 3 linhas elegantes
+      // Limita headline a 85 caracteres para garantir 2 a 3 linhas elegantes
       if (slide.headline.length > 85) {
         slide.headline = slide.headline.slice(0, 82) + '...';
         proportionsAdjusted = true;
         notes.push('Headline sintetizada para preservar a safe zone.');
       }
 
-      // Limita subtítulo a 120 caracteres
+      // Limita subtítulo a 130 caracteres
       if (slide.subtitle && slide.subtitle.length > 130) {
         slide.subtitle = slide.subtitle.slice(0, 125) + '...';
         proportionsAdjusted = true;
@@ -103,27 +103,27 @@ export class QualityReviewerAgent {
 
     const checks = [
       {
-        name: 'Bloqueio Estrito de E comercial e Travessoes',
+        name: 'Bloqueio Estrito de E comercial e Travessões',
         passed: true,
         feedback:
           forbiddenCharsCount > 0
-            ? `${forbiddenCharsCount} caractere(s) proibido(s) removido(s) e substituido(s) com sucesso.`
-            : 'Nenhum caractere proibido (E comercial ou travessao) encontrado.',
+            ? `${forbiddenCharsCount} caractere(s) proibido(s) removido(s) e substituído(s) com sucesso.`
+            : 'Nenhum caractere proibido (& comercial ou travessão) encontrado.',
       },
       {
         name: 'Dimensionamento e Safe Zones 4:5',
         passed: slideAudits.every((a) => a.charCount <= 280),
-        feedback: 'Todas as lâminas dentro dos limites de altura e margens seguras.',
+        feedback: 'Todas as lâminas dentro dos limites de altura e margens seguras para feed do Instagram.',
       },
       {
         name: 'Hook de Parada no Slide 1',
         passed: correctedSlides[0]?.type === 'hook',
-        feedback: 'Lâmina inicial com abertura magnética focada na dor do lead.',
+        feedback: 'Lâmina inicial com abertura magnética focada na dor e rotina real do tutor.',
       },
       {
         name: 'CTA de Conversão no Slide Final',
         passed: Boolean(correctedSlides[correctedSlides.length - 1]?.ctaButtonText),
-        feedback: 'Chamada clara direcionando para o direct da @seupetequilibrado.',
+        feedback: 'Chamada clara direcionando para o direct e WhatsApp do @seupetequilibrado.',
       },
     ];
 

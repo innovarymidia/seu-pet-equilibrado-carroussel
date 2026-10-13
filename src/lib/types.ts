@@ -1,10 +1,17 @@
 export type ThemeStyle = 
-  | 'dark_fire'        // 1. Assinatura: Fundo preto espacial, laranja fogo glow, cards escuros
-  | 'clean_authority'  // 2. Clean: Fundo branco/off-white, tipografia preta, badges laranjas
-  | 'alert_loss'       // 3. Alerta de Prejuízo: Estilo de alto impacto emocional, avisos de perigo
-  | 'data_growth'      // 4. Métricas & Growth: Estilo analítico/dashboard, números e ROI
-  | 'thread_social'    // 5. Thread / Perfil: Bate-papo de autoridade com avatar da agência
-  | 'sunset_gradient'; // 6. Sunset Food Gradient: Gradiente escuro para laranja gastronômico
+  | 'rose_editorial'   // 1. Assinatura Oficial: Obsidian Deep (#0C0E12), Cards (#14171C), Rose Pastel (#F5BAC9)
+  | 'clean_cream'      // 2. Clean Editorial Pastel: Fundo claro (#FAF6F7), tipografia elegante, acento rose
+  | 'dark_luxury'      // 3. Obsidian & Champagne: Autoridade máxima em comportamento canino
+  | 'alert_behavior'   // 4. Alerta Comportamental: Alto impacto para erros comuns que pioram o cão
+  | 'natural_harmony'  // 5. Equilíbrio & Natureza: Verde sálvia e rose, foco em rotina e passeios
+  | 'chat_consultoria' // 6. Consultoria Tutor: Formato conversa direta com conselhos práticos
+  // Compatibilidade retroativa
+  | 'dark_fire'
+  | 'clean_authority'
+  | 'alert_loss'
+  | 'data_growth'
+  | 'thread_social'
+  | 'sunset_gradient';
 
 export type SlideType = 'hook' | 'problem' | 'solution' | 'proof' | 'cta' | 'content';
 
@@ -44,11 +51,11 @@ export interface CarouselProject {
 }
 
 export type AgentRole = 
-  | 'strategist'  // Estrategista de Vendas Delivery
-  | 'copywriter'  // Roteirista de Carrosséis
-  | 'designer'    // Diretor de Arte
-  | 'qa'          // Revisor de Qualidade
-  | 'publisher';  // Exportador / Publicador
+  | 'strategist'  // Estrategista de Comportamento Canino & Psicologia Canina
+  | 'copywriter'  // Roteirista Especialista em Conteúdo para Tutores
+  | 'designer'    // Diretor de Arte do Seu Pet Equilibrado
+  | 'qa'          // Auditor de Safe Zones & Clareza Educativa
+  | 'publisher';  // Empacotador & Exportador de Alta Definição
 
 export interface AgentStatus {
   role: AgentRole;
@@ -62,9 +69,9 @@ export interface AgentStatus {
 
 export interface GenerationInput {
   topic?: string;
-  targetCategory?: string; // Hamburgueria, Pizzaria, Sushi, Marmitaria, Restaurante Geral
+  targetCategory?: string; // Tutores de Filhotes, Cães Reativos, Cães Ansiosos, Passeio Estressante, etc.
   slideCount: number; // 5, 6 ou 7
   themeStyle: ThemeStyle;
-  tone?: 'impactante' | 'estrategico' | 'urgencia' | 'educativo';
+  tone?: 'educativo' | 'alerta' | 'passo_a_passo' | 'autoridade';
   apiKey?: string;
 }

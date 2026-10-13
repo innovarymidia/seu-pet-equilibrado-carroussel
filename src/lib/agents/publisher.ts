@@ -3,9 +3,9 @@ import { toBlob } from 'html-to-image';
 import { CarouselProject } from '../types';
 
 export class PublisherAgent {
-  name = 'Saitama';
-  title = 'Comandante de Exportação Rápida & Automação Meta';
-  avatar = '🥊';
+  name = 'Publicador';
+  title = 'Comandante de Exportação em Alta Definição & Meta Sync';
+  avatar = '📦';
 
   /**
    * Empacota todos os slides do carrossel em um arquivo .ZIP em alta resolução
@@ -16,7 +16,7 @@ export class PublisherAgent {
     onProgress?: (percent: number, current: number, total: number) => void
   ): Promise<Blob> {
     const zip = new JSZip();
-    const folder = zip.folder(`innovary-carrossel-${project.id.slice(0, 8)}`);
+    const folder = zip.folder(`seupet-carrossel-${project.id.slice(0, 8)}`);
 
     const total = slideElements.length;
 
@@ -43,13 +43,20 @@ export class PublisherAgent {
 
     // Adiciona arquivo de texto com a legenda e hashtags
     if (folder) {
-      const readmeContent = `CARROSSEL INNOVARY MÍDIA (@seupetequilibrado)
+      const readmeContent = `==================================================
+SEU PET EQUILIBRADO | CARROSSEL OFICIAL
+Adestramento e Comportamento Canino
+Instagram: @seupetequilibrado
+Site: https://seu-pet-equilibrado.vercel.app/
+WhatsApp: +55 (65) 98429-8949
+==================================================
+
 Tema: ${project.topic}
 Total de Lâminas: ${project.slideCount}
 Estilo Visual: ${project.themeStyle}
 
 ==================================================
-LEGENDA PARA O POST DO INSTAGRAM:
+LEGENDA PRONTA PARA O INSTAGRAM:
 ==================================================
 
 ${project.caption}
@@ -58,10 +65,12 @@ ${project.hashtags.join(' ')}
 
 ==================================================
 INSTRUÇÕES DE POSTAGEM:
-1. Abra o Instagram no celular ou no Meta Business Suite.
-2. Selecione as imagens em ordem numérica (slide-01.png até slide-${String(total).padStart(2, '0')}.png).
-3. Cole a legenda acima e adicione a localização da sua agência ou do cliente alvo.
-4. Publique no melhor horário (11h30 às 13h ou 18h às 20h).
+==================================================
+1. Abra o Instagram no celular ou o Meta Business Suite no computador.
+2. Crie uma publicação e selecione as imagens em ordem numérica (slide-01.png até slide-${String(total).padStart(2, '0')}.png).
+3. Cole a legenda acima e adicione a localização (Cuiabá / MT ou Brasil).
+4. Melhores horários para engajamento de tutores: 07h30 às 09h, 12h às 13h30 ou 19h às 21h30.
+5. Responda todos os comentários e directs direcionando para agendamento!
 `;
       folder.file('legenda-e-instrucoes.txt', readmeContent);
     }
@@ -91,7 +100,7 @@ INSTRUÇÕES DE POSTAGEM:
     if (!credentials.accessToken || !credentials.instagramAccountId) {
       return {
         success: false,
-        error: 'Credenciais da Instagram Graph API não fornecidas. Utilize o modo de download manual por enquanto.',
+        error: 'Credenciais da Instagram Graph API não configuradas. Utilize o modo de download do ZIP.',
       };
     }
 

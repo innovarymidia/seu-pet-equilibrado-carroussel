@@ -27,7 +27,7 @@ export class MultiAgentOrchestrator {
         title: this.strategist.title,
         avatar: this.strategist.avatar,
         status: 'idle',
-        message: 'Aguardando tema para mapear o ângulo de dor do lead...',
+        message: 'Aguardando tema para mapear o ângulo de comportamento canino e a dor do tutor...',
       },
       {
         role: 'copywriter',
@@ -35,7 +35,7 @@ export class MultiAgentOrchestrator {
         title: this.copywriter.title,
         avatar: this.copywriter.avatar,
         status: 'idle',
-        message: 'Preparando roteiro de retenção e ganchos persuasivos...',
+        message: 'Preparando roteiro com reforço positivo, empatia e ganchos de retenção...',
       },
       {
         role: 'designer',
@@ -43,7 +43,7 @@ export class MultiAgentOrchestrator {
         title: this.designer.title,
         avatar: this.designer.avatar,
         status: 'idle',
-        message: 'Aguardando especificações para aplicar paleta Innovary...',
+        message: 'Aguardando especificações para aplicar paleta oficial Seu Pet Equilibrado...',
       },
       {
         role: 'qa',
@@ -51,7 +51,7 @@ export class MultiAgentOrchestrator {
         title: this.qa.title,
         avatar: this.qa.avatar,
         status: 'idle',
-        message: 'Executará Auto-Análise (Safe Zones, Proporção e Bloqueio de & e travessões)...',
+        message: 'Executará Auto-Análise (Safe Zones 4:5, Proporção e Bloqueio de & e travessões)...',
       },
       {
         role: 'publisher',
@@ -81,41 +81,40 @@ export class MultiAgentOrchestrator {
     };
 
     // =========================================================================
-    // ETAPA 1: AGENTE ESTRATEGISTA DE ADESTRAMENTO EQUILIBRADO
+    // ETAPA 1: AGENTE ESTRATEGISTA DE COMPORTAMENTO CANINO (JOÃO EDUARDO)
     // =========================================================================
-    updateAgent('strategist', 'running', 'Analisando o perfil do dono de delivery e dores do iFood...');
+    updateAgent('strategist', 'running', 'Analisando a dor do tutor e a causa comportamental do cão...');
     await delay(350);
 
     const brief = this.strategist.analyze(input);
     updateAgent(
       'strategist',
       'completed',
-      'Ângulo estratégico definido!',
-      `Dor central: ${brief.corePain.slice(0, 65)}...`
+      'Ângulo comportamental mapeado!',
+      `Tema: ${brief.category} | Causa: ${brief.culprit.slice(0, 60)}...`
     );
 
     // =========================================================================
-    // ETAPA 2: AGENTE COPYWRITER & ROTEIRISTA
+    // ETAPA 2: AGENTE COPYWRITER & ROTEIRISTA (NICOLLE)
     // =========================================================================
-    updateAgent('copywriter', 'running', `Escrevendo roteiro de ${input.slideCount} lâminas com retenção...`);
+    updateAgent('copywriter', 'running', `Escrevendo roteiro de ${input.slideCount} lâminas com metodologia positiva...`);
     await delay(400);
 
-    // Tenta geração via LLM (OpenRouter / Gemini) ou fallback para motor estratégico
+    // Tenta geração via LLM (OpenRouter / Gemini) ou fallback para motor estratégico local
     let copyOutput = await this.tryLLMGeneration(input, brief);
     if (!copyOutput) {
-      // Fallback para o motor estratégico local
       copyOutput = this.copywriter.generate(input, brief);
     }
 
     updateAgent(
       'copywriter',
       'completed',
-      `${copyOutput.slides.length} lâminas geradas!`,
+      `${copyOutput.slides.length} lâminas geradas com sucesso!`,
       `Hook: "${copyOutput.slides[0].headline.slice(0, 50)}..."`
     );
 
     // =========================================================================
-    // ETAPA 3: AGENTE DIRETOR DE ARTE
+    // ETAPA 3: AGENTE DIRETOR DE ARTE (IDENTIDADE SEU PET EQUILIBRADO)
     // =========================================================================
     updateAgent('designer', 'running', `Formatando no padrão 1080x1350 no estilo ${input.themeStyle}...`);
     await delay(300);
@@ -125,16 +124,15 @@ export class MultiAgentOrchestrator {
       'designer',
       'completed',
       `Estilo ${styleSpec.name} aplicado!`,
-      `Paleta oficial: Laranja ${styleSpec.accentColor} | Space Grotesk`
+      `Paleta oficial Seu Pet Equilibrado: Rose Pastel e Obsidian Deep`
     );
 
     // =========================================================================
     // ETAPA 4: AGENTE REVISOR DE QUALIDADE (QA & AUTO-ANÁLISE OBRIGATÓRIA)
     // =========================================================================
-    updateAgent('qa', 'running', 'Executando Auto-Análise prévia: checando Safe Zones, corte e caracteres proibidos...');
+    updateAgent('qa', 'running', 'Executando Auto-Análise prévia: checando Safe Zones 4:5 e caracteres proibidos...');
     await delay(450);
 
-    // Executa auto-análise e correção automática deSafe Zones e caracteres
     const qaReport: QAReport = this.qa.reviewAndAutoCorrect(copyOutput.slides);
 
     updateAgent(
@@ -153,9 +151,9 @@ export class MultiAgentOrchestrator {
       id: ensureUUID(),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      topic: input.topic || 'Como parar de perder margem no delivery',
-      targetAudience: 'Tutores de Cães com Desafios Comportamentais (Passeio, Reatividade, Ansiedade)',
-      niche: 'Tráfego Pago para Delivery',
+      topic: input.topic || 'Passeio Sem Puxar: O método passo a passo para caminhar com guia frouxa',
+      targetAudience: 'Tutores de Cães com Desafios Comportamentais e Rotina',
+      niche: 'Adestramento e Comportamento Canino',
       slideCount: qaReport.sanitizedSlides.length,
       themeStyle: input.themeStyle,
       caption: copyOutput.caption,
@@ -166,26 +164,37 @@ export class MultiAgentOrchestrator {
       qaReport,
     };
 
-    // Garante sanitização final em todo o projeto
     return sanitizeProject(baseProject);
   }
 
   private async tryLLMGeneration(input: GenerationInput, brief: any): Promise<{ slides: SlideData[]; caption: string; hashtags: string[] } | null> {
-    const openrouterKey = process.env.OPENROUTER_API_KEY || process.env.NEXT_PUBLIC_OPENROUTER_API_KEY || (typeof window !== 'undefined' ? localStorage.getItem('innovary_openrouter_key') : null);
-    const geminiKey = input.apiKey || process.env.NEXT_PUBLIC_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+    const openrouterKey = process.env.OPENROUTER_API_KEY || process.env.NEXT_PUBLIC_OPENROUTER_API_KEY || (typeof window !== 'undefined' ? localStorage.getItem('seupet_openrouter_key') || localStorage.getItem('innovary_openrouter_key') : null);
+    const geminiKey = input.apiKey || process.env.NEXT_PUBLIC_GEMINI_API_KEY || process.env.GEMINI_API_KEY || (typeof window !== 'undefined' ? localStorage.getItem('seupet_gemini_key') || localStorage.getItem('innovary_gemini_key') : null);
 
     if (!openrouterKey && !geminiKey) return null;
 
-    const prompt = `Você é o copywriter estrategista da agência @seupetequilibrado (www.innovarymidia.com.br), especializada em tráfego e vendas para restaurantes e delivery.
-Crie um carrossel para Instagram de EXATAMENTE ${input.slideCount} lâminas.
-Tema: "${input.topic || 'Como parar de perder margem no delivery'}"
+    const prompt = `Você é o especialista mestre em comportamento e adestramento canino da marca @seupetequilibrado (https://seu-pet-equilibrado.vercel.app/).
+Os adestradores responsáveis são João Eduardo (atendimento presencial em Cuiabá e Várzea Grande) e Nicolle (consultoria comportamental online para todo o Brasil).
+A metodologia é 100% baseada em estudos científicos, reforço positivo, adequação de rotina e bem-estar do animal, sem nenhum método violento ou aversivo.
+
+Crie um carrossel para Instagram de EXATAMENTE ${input.slideCount} lâminas para tutores de cães.
+Tema: "${input.topic || 'Passeio Sem Puxar: O método passo a passo para caminhar com guia frouxa'}"
+Categoria: "${brief.category || 'Comportamento Canino'}"
+Dor central do tutor: "${brief.corePain}"
+Causa comportamental: "${brief.culprit}"
+Solução proposta: "${brief.solutionAngle}"
 
 DIRETRIZES FUNDAMENTAIS DE DESIGN E COPY:
 1. JAMAIS use o caractere & em nenhum lugar. Sempre escreva "e".
 2. JAMAIS use travessão (— ou –) nem hífens isolados no texto.
-3. CONCISÃO ABSOLUTA: Textos ultra enxutos (headline máx 75 caracteres, subtítulo máx 95 caracteres) para caber perfeitamente na proporção 4:5 vertical (1080x1350) sem corte.
-4. Lâmina 1: Gancho forte instigando o dono de delivery.
-5. Lâmina final (slide ${input.slideCount}): CTA para mandar mensagem no direct da @seupetequilibrado.
+3. CONCISÃO ABSOLUTA: Textos ultra enxutos (headline máx 75 caracteres, subtítulo máx 100 caracteres) para caber perfeitamente na proporção 4:5 vertical (1080x1350) do Instagram sem corte de texto.
+4. Lâmina 1: Gancho instigante que faça o tutor parar o feed imediatamente.
+5. Lâmina 2: A dor vivida no dia a dia com empatia.
+6. Lâmina 3: O erro comum que tutores cometem sem saber.
+7. Lâmina 4: A explicação científica e a solução pelo reforço positivo.
+${input.slideCount >= 6 ? '8. Lâmina 5: Passo a passo prático para o tutor testar hoje em casa.' : ''}
+${input.slideCount === 7 ? '9. Lâmina 6: Como fica a convivência harmoniosa após o equilíbrio.' : ''}
+10. Lâmina final (slide ${input.slideCount}): CTA chamando para enviar mensagem no direct do @seupetequilibrado ou WhatsApp (65 98429-8949) para consultoria presencial em Cuiabá/VG ou online.
 
 Retorne SOMENTE um JSON válido com a seguinte estrutura:
 {
@@ -193,14 +202,14 @@ Retorne SOMENTE um JSON válido com a seguinte estrutura:
     {
       "slideNumber": 1,
       "type": "hook",
-      "badge": "ALERTA PARA DELIVERY",
-      "headline": "Título instigante",
+      "badge": "COMPORTAMENTO CANINO",
+      "headline": "Título instigante curto",
       "subtitle": "Subtítulo enxuto",
       "ctaButtonText": "Arraste para entender ➔"
     }
   ],
-  "caption": "Legenda persuasiva completa com quebras de linha e chamada para o direct da @seupetequilibrado",
-  "hashtags": ["#marketingparadelivery", "#gestaodetrafego", "#innovarymidia"]
+  "caption": "Legenda empática e completa com quebras de linha e chamada para o direct do @seupetequilibrado",
+  "hashtags": ["#seupetequilibrado", "#adestramentocanino", "#comportamentocanino", "#adestramentopositivo", "#tutoresdecaes", "#adestradorcuiaba"]
 }`;
 
     // 1. Tenta via OpenRouter se chave configurada

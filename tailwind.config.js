@@ -4,35 +4,51 @@ module.exports = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/lib/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         brand: {
-          bg: '#0a0a0a',
-          card: '#141414',
-          cardHover: '#1c1c1c',
-          border: '#262626',
-          orange: '#FF3D00',
-          orangeDark: '#EA580C',
-          orangeGlow: 'rgba(255, 61, 0, 0.25)',
+          // Obsidian Deep Theme - Identidade Seu Pet Equilibrado
+          bg: '#0C0E12',
+          surface: '#14171C',
+          card: '#14171C',
+          cardHover: '#1B1E26',
+          cardElevated: '#1B1E26',
+          border: 'rgba(255, 255, 255, 0.08)',
+          borderHover: 'rgba(245, 186, 201, 0.35)',
+          
+          // Rose Pastel Acentos
+          rose: '#F5BAC9',
+          roseLight: '#FCE8EE',
+          roseHover: '#F8CAD6',
+          roseDark: '#2B181E',
+          roseBorder: 'rgba(245, 186, 201, 0.28)',
+          roseGlow: 'rgba(245, 186, 201, 0.25)',
+          
+          // Tipografia
           text: '#FFFFFF',
-          muted: '#A1A1AA',
+          textSecondary: '#9DA3B4',
+          muted: '#6B7280',
+          darkText: '#121418',
         },
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'sans-serif'],
       },
       boxShadow: {
-        glow: '0 0 35px -5px rgba(255, 61, 0, 0.35)',
-        glowSm: '0 0 15px -3px rgba(255, 61, 0, 0.4)',
+        glow: '0 0 35px -5px rgba(245, 186, 201, 0.28)',
+        glowSm: '0 0 15px -3px rgba(245, 186, 201, 0.35)',
+        rose: '0 10px 30px -5px rgba(245, 186, 201, 0.22)',
       },
       backgroundImage: {
-        'brand-gradient': 'linear-gradient(135deg, #FF3D00 0%, #EA580C 100%)',
-        'dark-radial': 'radial-gradient(circle at top center, rgba(255, 61, 0, 0.12) 0%, transparent 70%)',
+        'rose-gradient': 'linear-gradient(135deg, #F5BAC9 0%, #F8CAD6 100%)',
+        'dark-radial': 'radial-gradient(circle at top center, rgba(245, 186, 201, 0.08) 0%, transparent 70%)',
       },
     },
   },
   plugins: [],
-}
+};

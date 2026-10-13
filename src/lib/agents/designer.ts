@@ -6,7 +6,7 @@ export interface StyleSpec {
   name: string;
   canvasWidth: number;   // 1080px (largura padrão Instagram)
   canvasHeight: number;  // 1350px (formato 4:5 vertical ideal para carrossel)
-  safeAreaPadding: number; // 80px (margens para elementos de UI do Instagram)
+  safeAreaPadding: number; // 90px (margens para elementos de UI do Instagram)
   backgroundColor: string;
   cardBackground: string;
   cardBorder: string;
@@ -22,12 +22,12 @@ export interface StyleSpec {
 }
 
 export class DesignerAgent {
-  name = 'Deidara';
-  title = 'Diretor de Arte & Suprema Identidade Visual Innovary';
+  name = 'Nicolle & Equipe';
+  title = 'Diretora de Arte & Identidade Visual Seu Pet Equilibrado';
   avatar = '🎨';
 
   getStyleSpec(styleId: ThemeStyle): StyleSpec {
-    const config = THEME_CONFIGS[styleId] || THEME_CONFIGS.dark_fire;
+    const config = THEME_CONFIGS[styleId] || THEME_CONFIGS.rose_editorial;
 
     return {
       id: styleId,
@@ -45,8 +45,8 @@ export class DesignerAgent {
       badgeBg: config.badgeBg,
       badgeBorder: config.badgeBorder,
       badgeText: config.badgeText,
-      fontHeadline: 'Space Grotesk, sans-serif',
-      fontBody: 'Space Grotesk, sans-serif',
+      fontHeadline: "'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+      fontBody: "'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
     };
   }
 }

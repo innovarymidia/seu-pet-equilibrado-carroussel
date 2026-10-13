@@ -7,9 +7,9 @@ export async function POST(req: NextRequest) {
     const orchestrator = new MultiAgentOrchestrator();
 
     const project = await orchestrator.run({
-      topic: body.topic || 'Como parar de depender das taxas abusivas do iFood',
+      topic: body.topic || 'Passeio Sem Puxar: O método passo a passo para caminhar com guia frouxa',
       slideCount: body.slideCount || 6,
-      themeStyle: body.themeStyle || 'dark_fire',
+      themeStyle: body.themeStyle || 'rose_editorial',
       apiKey: body.apiKey,
     });
 
