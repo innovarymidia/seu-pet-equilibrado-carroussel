@@ -1048,7 +1048,7 @@ Mande uma mensagem na nossa DM (@seupetequilibrado)!`;
         points: [
           'Recompensa imediata quando o cão escolhe a conduta correta',
           'Ajuste das necessidades biológicas e mentais da espécie',
-          'Construção de uma liderança justa, calma e confiável',
+          'Construção de um vínculo seguro, calmo e previsível',
         ],
       },
     ];

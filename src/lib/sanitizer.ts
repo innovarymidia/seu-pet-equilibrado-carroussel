@@ -20,13 +20,24 @@ export function sanitizeText(text?: string | null): string {
       .replace(/\s+-\s+/g, ', ')
       .replace(/\s+-/g, ', ')
       .replace(/-\s+/g, ', ')
-      // 5. Limpa pontuações duplicadas resultantes de substituições
+      // 5. Expurgar qualquer menção a teorias ultrapassadas de liderança, matilha ou alfa
+      .replace(/l[ií]der\s+da\s+matilha/gi, 'referência de segurança')
+      .replace(/l[ií]deres\s+da\s+matilha/gi, 'referências de segurança')
+      .replace(/lideran[cç]a\s+da\s+matilha/gi, 'vínculo de confiança')
+      .replace(/lideran[cç]a\s+justa/gi, 'parceria e previsibilidade')
+      .replace(/lideran[cç]a\s+calma/gi, 'postura calma e segura')
+      .replace(/lideran[cç]as?/gi, 'parceria e previsibilidade')
+      .replace(/l[ií]deres/gi, 'tutores')
+      .replace(/l[ií]der/gi, 'tutor de referência')
+      .replace(/matilhas?/gi, 'família')
+      .replace(/macho\s+alfa|alfa\s+da\s+matilha/gi, 'cão seguro')
+      // 6. Limpa pontuações duplicadas resultantes de substituições
       .replace(/,\s*,/g, ',')
       .replace(/\.\s*\./g, '.')
       .replace(/,\s*\./g, '.')
       .replace(/\.\s*,/g, '.')
       .replace(/,\s*:/g, ':')
-      // 6. Remove espaços em excesso e espaços antes de pontuação
+      // 7. Remove espaços em excesso e espaços antes de pontuação
       .replace(/\s+([,.:;?!])/g, '$1')
       .replace(/\s{2,}/g, ' ')
       .trim()

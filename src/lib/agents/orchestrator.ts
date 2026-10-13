@@ -187,11 +187,12 @@ Solução proposta: "${brief.solutionAngle}"
 DIRETRIZES FUNDAMENTAIS DE DESIGN E COPY:
 1. JAMAIS use o caractere & em nenhum lugar. Sempre escreva "e".
 2. JAMAIS use travessão (— ou –) nem hífens isolados no texto.
-3. CONCISÃO ABSOLUTA: Textos ultra enxutos (headline máx 75 caracteres, subtítulo máx 100 caracteres) para caber perfeitamente na proporção 4:5 vertical (1080x1350) do Instagram sem corte de texto.
-4. Lâmina 1: Gancho instigante que faça o tutor parar o feed imediatamente.
-5. Lâmina 2: A dor vivida no dia a dia com empatia.
-6. Lâmina 3: O erro comum que tutores cometem sem saber.
-7. Lâmina 4: A explicação científica e a solução pelo reforço positivo.
+3. JAMAIS use termos desatualizados da teoria da dominância como "líder", "líder da matilha", "liderança", "matilha" ou "macho alfa". A metodologia científica do Seu Pet Equilibrado é 100% positiva, focada em tutoria responsável, parceria, vínculo de confiança, previsibilidade e clareza de comunicação.
+4. CONCISÃO ABSOLUTA: Textos ultra enxutos (headline máx 75 caracteres, subtítulo máx 100 caracteres) para caber perfeitamente na proporção 4:5 vertical (1080x1350) do Instagram sem corte de texto.
+5. Lâmina 1: Gancho instigante que faça o tutor parar o feed imediatamente.
+6. Lâmina 2: A dor vivida no dia a dia com empatia.
+7. Lâmina 3: O erro comum que tutores cometem sem saber.
+8. Lâmina 4: A explicação científica e a solução pelo reforço positivo.
 ${input.slideCount >= 6 ? '8. Lâmina 5: Passo a passo prático para o tutor testar hoje em casa.' : ''}
 ${input.slideCount === 7 ? '9. Lâmina 6: Como fica a convivência harmoniosa após o equilíbrio.' : ''}
 10. Lâmina final (slide ${input.slideCount}): CTA chamando para enviar mensagem no direct do @seupetequilibrado ou WhatsApp (65 98429-8949) para consultoria presencial em Cuiabá/VG ou online.

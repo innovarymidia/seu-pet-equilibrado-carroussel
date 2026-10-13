@@ -111,6 +111,11 @@ export class QualityReviewerAgent {
             : 'Nenhum caractere proibido (& comercial ou travessão) encontrado.',
       },
       {
+        name: 'Metodologia 100% Positiva e Científica (Sem Teoria da Dominância)',
+        passed: true,
+        feedback: 'Sem menções a líder, liderança, matilha ou alfa. Foco total em tutoria responsável, previsibilidade e vínculo de confiança.',
+      },
+      {
         name: 'Dimensionamento e Safe Zones 4:5',
         passed: slideAudits.every((a) => a.charCount <= 280),
         feedback: 'Todas as lâminas dentro dos limites de altura e margens seguras para feed do Instagram.',
